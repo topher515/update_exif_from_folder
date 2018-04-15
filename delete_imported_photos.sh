@@ -1,0 +1,1 @@
+for x in "$(cat imported_photos.log)"; do rm "$x"; done
