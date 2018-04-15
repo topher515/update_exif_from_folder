@@ -148,7 +148,7 @@ def main():
   with open(IMPORTED_FILE_LOG_PATH, 'a') as imported_file_log:
 
     for jpeg in all_jpegs:
-      imported_file_log.writeline(jpef) # For cleanup later
+      imported_file_log.write(jpeg + '\n') # For cleanup later
       print jpeg # For the Automator script
 
 

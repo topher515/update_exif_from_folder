@@ -220,7 +220,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>PATH=$PATH:/usr/local/bin/ /Users/ckwilcox/Projects/update_exif_from_folder/venv/bin/python /Users/ckwilcox/Projects/update_exif_from_folder/main.py</string>
+					<string>~/Projects/update_exif_from_folder/venv/bin/python ~/Projects/update_exif_from_folder/main.py</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
