@@ -82,7 +82,7 @@ def update_folder_images_exif_datetime_from_folder_name(folder_path):
   except MissingOriginalDateTime:
     log.warning("'%(folder_path)s' images seem to have no exif data." % locals())
     update_images_exif_datetime(jpeg_image_paths, folder_datetime)
-  except Exception:
+  except:
     log.warning("'%(folder_path)s' cant read exif data" % locals())
     update_images_exif_datetime(jpeg_image_paths, folder_datetime)
 
