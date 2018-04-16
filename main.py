@@ -81,22 +81,23 @@ def update_folder_images_exif_datetime_from_folder_name(folder_path):
 
   except MissingOriginalDateTime:
     log.warning("'%(folder_path)s' images seem to have no exif data." % locals())
-    update_images_exif_datetime(jpeg_image_paths, folder_datetime)
+    successful_jpeg_image_paths = update_images_exif_datetime(jpeg_image_paths, folder_datetime)
   except:
     log.warning("'%(folder_path)s' cant read exif data" % locals())
-    update_images_exif_datetime(jpeg_image_paths, folder_datetime)
+    successful_jpeg_image_paths = update_images_exif_datetime(jpeg_image_paths, folder_datetime)
 
   else:
     time_diff = folder_datetime - base_image_datetime # How far off track is timediff
 
     if abs(time_diff) < timedelta(hours=24):
       log.warning("'%(folder_path)s' images seem to have correct exif data: skipping." % locals())
+      successful_jpeg_image_paths = jpeg_image_paths
     
     else:
       log.warning("'%(folder_path)s' updating images by %(time_diff)s." % locals())
-      update_images_exif_datetime(jpeg_image_paths, folder_datetime)
+      successful_jpeg_image_paths = update_images_exif_datetime(jpeg_image_paths, folder_datetime)
 
-  return jpeg_image_paths
+  return successful_jpeg_image_paths
 
 
 def get_image_original_datetime(image_path):
@@ -115,8 +116,15 @@ def get_image_original_datetime(image_path):
 
 
 def update_images_exif_datetime(image_paths, new_dt):
+  success_images = []
   for image_path in image_paths:
-    update_image_exif_datetime(image_path, new_dt)
+    try:
+      update_image_exif_datetime(image_path, new_dt)
+    except:
+      success_images.append(image_path)
+
+  return success_images
+
 
 def update_image_exif_datetime(image_path, new_dt):
   '''
